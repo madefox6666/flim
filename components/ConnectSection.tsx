@@ -24,7 +24,7 @@ const ConnectSection: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const btn = e.currentTarget.querySelector('button');
+    const btn = (e.currentTarget as HTMLFormElement).querySelector('button');
     if (btn) btn.innerText = 'TRANSMITTING...';
     
     setTimeout(() => {
@@ -76,9 +76,10 @@ const ConnectSection: React.FC = () => {
             className="py-4 text-xs md:text-sm font-light placeholder:text-gray-800 placeholder:uppercase placeholder:tracking-[0.3em] resize-none overflow-hidden"
             value={formState.vision}
             onChange={e => {
-              setFormState({...formState, vision: e.target.value});
-              e.target.style.height = 'auto';
-              e.target.style.height = e.target.scrollHeight + 'px';
+              const target = e.target as HTMLTextAreaElement;
+              setFormState({...formState, vision: target.value});
+              target.style.height = 'auto';
+              target.style.height = target.scrollHeight + 'px';
             }}
           />
 
